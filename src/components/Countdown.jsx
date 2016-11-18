@@ -26,12 +26,19 @@ var Countdown = React.createClass({
       }
     }
   },
+  componentWillUnmount(){
+    clearInterval(this.timer);
+    this.timer = undefined;
+  },
   startTimer(){
     this.timer = setInterval(() => {
+      var updates = {}
       var newCount = this.state.count - 1;
-      this.setState({
-        count: newCount >= 0 ? newCount : 0,
-      });
+      updates.count = newCount >= 0 ? newCount : 0;
+      if(newCount === 0){
+        updates.countdownStatus = 'stopped';
+      }
+      this.setState(updates);
     }, 1000);
   },
   handleSetCountdown(seconds){
