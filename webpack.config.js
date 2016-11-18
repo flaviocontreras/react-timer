@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+var path = require('path');
 
 module.exports = {
   entry: [
@@ -16,12 +16,6 @@ module.exports = {
       '$': 'jquery',
       'jQuery': 'jquery'
     })
-    //,
-    // new BrowserSyncPlugin({
-    //   host: 'localhost',
-    //   port: 3000,
-    //   server: { baseDir: ['public'] }
-    // })
   ],
   output: {
     path: __dirname,
@@ -51,6 +45,11 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/
       }
+    ]
+  },
+  sassLoader:{
+    includePaths: [
+      path.resolve(__dirname, './node_modules/foundation-sites/scss')
     ]
   },
   devtool: 'eval-source-map'
